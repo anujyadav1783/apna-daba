@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Apna Dabba</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="dash-layout">
+        <!-- Sidebar -->
+        <aside class="dash-sidebar" id="sidebar">
+            <div class="sidebar-logo">
+                <div class="logo-icon"><i class="fas fa-box-open"></i></div>
+                <span class="sidebar-text">Apna Dabba</span>
+                <i class="fas fa-times mobile-close" onclick="toggleSidebar()"></i>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item active" title="Dashboard"><i class="fas fa-home"></i> <span class="sidebar-text">Dashboard</span></a>
+                <a href="#" class="nav-item" title="Profile"><i class="fas fa-user"></i> <span class="sidebar-text">Profile</span></a>
+                <a href="menu.html" class="nav-item" title="Meal Plan"><i class="fas fa-calendar-alt"></i> <span class="sidebar-text">Meal Plan</span></a>
+                <a href="#" class="nav-item" title="Order History"><i class="fas fa-history"></i> <span class="sidebar-text">Order History</span></a>
+                <a href="#" class="nav-item" title="Analytics"><i class="fas fa-chart-line"></i> <span class="sidebar-text">Analytics</span></a>
+                
+                <div class="sidebar-spacer"></div>
+                
+                <a href="#" class="nav-item logout-link" onclick="logout(); return false;" title="Logout"><i class="fas fa-sign-out-alt"></i> <span class="sidebar-text">Logout</span></a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dash-main">
+            <!-- Header -->
+            <header class="dash-header mb-4">
+                <div class="header-left">
+                    <div class="mobile-toggle" onclick="toggleSidebar()"><i class="fas fa-bars"></i></div>
+                    <div class="header-text">
+                        <h2 id="user-name" class="skeleton-text">Good Evening, User</h2>
+                        <p id="current-date" class="text-sm text-muted skeleton-text">Today is loading...</p>
+                    </div>
+                </div>
+                <div class="header-badges">
+                    <span class="badge premium skeleton" id="plan-badge"><i class="fas fa-star"></i> Premium</span>
+                    <span class="badge status active skeleton" id="status-badge"><i class="fas fa-check-circle"></i> Active</span>
+                    <div class="avatar skeleton-avatar" id="user-avatar-initial">A</div>
+                </div>
+            </header>
+
+            <div class="main-content-area">
+                <!-- Top Row: 4 KPIs -->
+                <div class="kpi-grid mb-4">
+                    <div class="kpi-card skeleton">
+                        <div class="kpi-icon orders"><i class="fas fa-shopping-bag"></i></div>
+                        <div class="kpi-content">
+                            <h4 class="kpi-label">Total Orders</h4>
+                            <h3 class="kpi-val" id="total-orders">--</h3>
+                        </div>
+                    </div>
+                    <div class="kpi-card skeleton">
+                        <div class="kpi-icon spend"><i class="fas fa-wallet"></i></div>
+                        <div class="kpi-content">
+                            <h4 class="kpi-label">Monthly Spend</h4>
+                            <h3 class="kpi-val" id="monthly-expenses">--</h3>
+                        </div>
+                    </div>
+                    <div class="kpi-card skeleton">
+                        <div class="kpi-icon plan"><i class="fas fa-calendar-check"></i></div>
+                        <div class="kpi-content">
+                            <h4 class="kpi-label">Active Plan</h4>
+                            <h3 class="kpi-val" id="active-plan">--</h3>
+                        </div>
+                    </div>
+                    <div class="kpi-card skeleton">
+                        <div class="kpi-icon health"><i class="fas fa-heartbeat"></i></div>
+                        <div class="kpi-content">
+                            <h4 class="kpi-label">Health Score</h4>
+                            <h3 class="kpi-val" id="health-score">--</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Middle Content -->
+                <div class="middle-grid">
+                    <!-- Analytics Chart -->
+                    <div class="dash-card chart-card skeleton">
+                        <div class="card-header">
+                            <h3>Analytics Trend</h3>
+                            <button class="header-action-btn"><i class="fas fa-ellipsis-h"></i></button>
+                        </div>
+                        <div class="chart-container" style="position: relative; height:280px; width:100%">
+                            <canvas id="mainChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="dash-card actions-card skeleton flex-col">
+                        <div class="card-header">
+                            <h3>Quick Actions</h3>
+                        </div>
+                        <div class="actions-list flex-1">
+                            <a href="menu.html" class="action-btn primary">
+                                <span class="act-icon"><i class="fas fa-utensils"></i></span>
+                                <div class="act-text">
+                                    <strong>Order Food</strong>
+                                    <span>Browse today's menu</span>
+                                </div>
+                                <i class="fas fa-chevron-right act-arrow"></i>
+                            </a>
+                            <a href="subscription.html" class="action-btn secondary">
+                                <span class="act-icon"><i class="fas fa-calendar-alt"></i></span>
+                                <div class="act-text">
+                                    <strong>View Plan</strong>
+                                    <span>Check your deliveries</span>
+                                </div>
+                                <i class="fas fa-chevron-right act-arrow"></i>
+                            </a>
+                            <a href="#" class="action-btn outline">
+                                <span class="act-icon"><i class="fas fa-sync-alt"></i></span>
+                                <div class="act-text">
+                                    <strong>Renew Subscription</strong>
+                                    <span>Extend your current plan</span>
+                                </div>
+                                <i class="fas fa-chevron-right act-arrow"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

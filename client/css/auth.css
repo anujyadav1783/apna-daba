@@ -1,0 +1,214 @@
+.auth-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: var(--surface);
+}
+
+.auth-header {
+    position: relative;
+    height: 250px;
+    background-image: url('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&q=80&w=800');
+    background-size: cover;
+    background-position: center;
+}
+
+.auth-header::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.8) 100%);
+}
+
+.auth-header .back-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: white;
+    z-index: 10;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.auth-header h1 {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: white;
+    z-index: 10;
+    font-size: 2rem;
+    max-width: 80%;
+    line-height: 1.2;
+}
+
+.auth-form-area {
+    flex: 1;
+    background: white;
+    border-radius: 24px 24px 0 0;
+    margin-top: -20px;
+    z-index: 11;
+    position: relative;
+    padding: 30px 20px;
+}
+
+.auth-tabs {
+    display: flex;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 24px;
+}
+
+.auth-tab {
+    flex: 1;
+    text-align: center;
+    padding: 12px 0;
+    font-weight: 600;
+    color: var(--text-muted);
+    font-size: 1rem;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+}
+
+.auth-tab.active {
+    color: var(--primary);
+    border-bottom-color: var(--primary);
+}
+
+.role-selector {
+    display: flex;
+    background-color: var(--bg-color);
+    border-radius: 30px;
+    padding: 4px;
+    margin-bottom: 24px;
+}
+
+.role-btn {
+    flex: 1;
+    text-align: center;
+    padding: 8px 0;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    border-radius: 30px;
+    background: transparent;
+    text-transform: uppercase;
+}
+
+.role-btn.active {
+    background: white;
+    color: var(--primary);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.auth-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text-main);
+}
+
+.input-with-icon {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.input-with-icon i {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+}
+
+.input-with-icon input {
+    padding-left: 44px;
+    height: 48px;
+    border-radius: 24px;
+}
+
+.input-with-icon .eye-icon {
+    left: auto;
+    right: 16px;
+    cursor: pointer;
+}
+
+.forgot-pwd {
+    text-align: right;
+    font-size: 0.85rem;
+    color: var(--primary);
+    font-weight: 600;
+    margin-bottom: 24px;
+    display: block;
+}
+
+.btn-primary.auth {
+    height: 54px;
+    border-radius: 27px;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 12px rgba(234, 88, 12, 0.3);
+}
+
+.social-login {
+    margin-top: 30px;
+    text-align: center;
+    position: relative;
+}
+
+.social-login::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: var(--border);
+    z-index: 1;
+}
+
+.social-login-text {
+    background-color: white;
+    padding: 0 10px;
+    display: inline-block;
+    position: relative;
+    z-index: 2;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.btn-google {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    height: 48px;
+    border-radius: 24px;
+    border: 1px solid var(--border);
+    background: white;
+    margin-top: 20px;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.btn-google img {
+    width: 18px;
+    height: 18px;
+}
+
+.auth-switch {
+    text-align: center;
+    margin-top: 24px;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.auth-switch a {
+    color: var(--primary);
+    font-weight: 600;
+}

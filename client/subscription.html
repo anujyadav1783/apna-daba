@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscriptions - Apna Dabba</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/subscription.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Navbar injected via JS -->
+
+    <div class="sub-container">
+        <div class="sub-header mt-4">
+            <h1>Choose your Tiffin Plan</h1>
+            <p>Fresh, home-style meals delivered daily. Save more with our monthly subscriptions.</p>
+        </div>
+
+        <!-- Active Subscription Status UI (Hidden by Default) -->
+        <div id="active-sub-view"
+            style="display:none; text-align:center; max-width:600px; margin: 0 auto 50px auto; background: var(--bg-color); padding: 30px; border-radius:24px; border:1px solid var(--border)">
+            <i class="fas fa-check-circle" style="font-size: 3rem; color: var(--success); margin-bottom: 20px;"></i>
+            <h2 style="margin-bottom: 10px;">You are subscribed!</h2>
+            <p style="color: var(--text-muted); margin-bottom: 20px;">You currently have an active <strong
+                    id="active-plan-name"></strong> plan.</p>
+            <button class="btn-outline" onclick="cancelSubscription()">Cancel Subscription</button>
+        </div>
+
+        <div class="plan-grid" id="plan-grid">
+            <!-- Plans Injected by JS -->
+        </div>
+
+        <!-- Plan Comparison Table -->
+        <div class="comparison-section mt-5"
+            style="background: white; border-radius: 20px; padding: 30px; border: 1px solid var(--border); overflow-x: auto;">
+            <h2 class="text-center mb-4">Compare Plans</h2>
+            <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                <thead>
+                    <tr style="border-bottom: 2px solid var(--border);">
+                        <th style="padding: 15px; font-weight: 700; color: var(--text-muted);">Features</th>
+                        <th style="padding: 15px; font-weight: 700; color: var(--primary); text-align: center;">Trial
+                            Start</th>
+                        <th style="padding: 15px; font-weight: 700; color: var(--primary); text-align: center;">Standard
+                            Pro</th>
+                        <th style="padding: 15px; font-weight: 700; color: var(--primary); text-align: center;">Premium
+                            Elite</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom: 1px solid var(--border);">
+                        <td style="padding: 15px; font-weight: 600;">Meals per week</td>
+                        <td style="padding: 15px; text-align: center;">3 Days</td>
+                        <td style="padding: 15px; text-align: center;">5 Days</td>
+                        <td style="padding: 15px; text-align: center;">6 Days</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--border);">
+                        <td style="padding: 15px; font-weight: 600;">Free Delivery</td>
+                        <td style="padding: 15px; text-align: center;"><i class="fas fa-times text-muted"></i></td>
+                        <td style="padding: 15px; text-align: center;"><i class="fas fa-check"
+                                style="color:#10b981;"></i></td>
+                        <td style="padding: 15px; text-align: center;"><i class="fas fa-check"
+                                style="color:#10b981;"></i></td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--border);">
+                        <td style="padding: 15px; font-weight: 600;">Weekend Special Dessert</td>
+                        <td style="padding: 15px; text-align: center;"><i class="fas fa-times text-muted"></i></td>
+                        <td style="padding: 15px; text-align: center;"><i class="fas fa-times text-muted"></i></td>
+                        <td style="padding: 15px; text-align: center;"><i class="fas fa-check"
+                                style="color:#10b981;"></i></td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 15px; font-weight: 600;">Pause Flexibility</td>
+                        <td style="padding: 15px; text-align: center;">No</td>
+                        <td style="padding: 15px; text-align: center;">Up to 2 days</td>
+                        <td style="padding: 15px; text-align: center;">Unlimited</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Customer Reviews -->
+        <div class="reviews-section mt-5" style="text-align: center;">
+            <h2 class="mb-4">Loved by over 2,000 customers</h2>
+            <div
+                style="display: flex; gap: 20px; overflow-x: auto; padding-bottom: 10px; justify-content: center; flex-wrap: wrap;">
+                <div
+                    style="background: white; border: 1px solid var(--border); padding: 20px; border-radius: 16px; min-width: 250px; text-align: left;">
+                    <div style="color: #fbbf24; margin-bottom: 10px;"><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i></div>
+                    <p style="font-size: 0.9rem; color: #555; margin-bottom: 10px;">"The closest thing to my mother's
+                        cooking. Absolutely love the dal makhani!"</p>
+                    <strong style="font-size: 0.85rem;">- Rahul K.</strong>
+                </div>
+                <div
+                    style="background: white; border: 1px solid var(--border); padding: 20px; border-radius: 16px; min-width: 250px; text-align: left;">
+                    <div style="color: #fbbf24; margin-bottom: 10px;"><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i></div>
+                    <p style="font-size: 0.9rem; color: #555; margin-bottom: 10px;">"Switched from Swiggy to apna dabba
+                        3 months ago. Never felt healthier."</p>
+                    <strong style="font-size: 0.85rem;">- Ananya S.</strong>
+                </div>
+                <div
+                    style="background: white; border: 1px solid var(--border); padding: 20px; border-radius: 16px; min-width: 250px; text-align: left;">
+                    <div style="color: #fbbf24; margin-bottom: 10px;"><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star-half-alt"></i></div>
+                    <p style="font-size: 0.9rem; color: #555; margin-bottom: 10px;">"Perfect portions and always on
+                        time. Highly recommended for bachelors."</p>
+                    <strong style="font-size: 0.85rem;">- Vikram M.</strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ Accordion -->
+        <div class="faq-section mt-5 mb-5" style="max-width: 800px; margin-left: auto; margin-right: auto;">
+            <h2 class="text-center mb-4">Frequently Asked Questions</h2>
+            <div class="accordion-item"
+                style="background: white; border: 1px solid var(--border); border-radius: 12px; margin-bottom: 10px; overflow: hidden;">
+                <button class="accordion-header"
+                    style="width: 100%; padding: 18px 20px; text-align: left; background: transparent; border: none; font-weight: 600; font-size: 1rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center;"
+                    onclick="toggleAccordion(this)">
+                    Can I pause my subscription?
+                    <i class="fas fa-chevron-down text-muted" style="transition: transform 0.3s;"></i>
+                </button>
+                <div class="accordion-body"
+                    style="padding: 0 20px; max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out;">
+                    <p style="padding-bottom: 18px; color: #555; font-size: 0.95rem;">Yes! You can pause your
+                        subscription up to 2 times a month on the Standard Pro plan, and unlimited times on the Premium
+                        Elite plan. The skipped days are added to your balance.</p>
+                </div>
+            </div>
+            <div class="accordion-item"
+                style="background: white; border: 1px solid var(--border); border-radius: 12px; margin-bottom: 10px; overflow: hidden;">
+                <button class="accordion-header"
+                    style="width: 100%; padding: 18px 20px; text-align: left; background: transparent; border: none; font-weight: 600; font-size: 1rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center;"
+                    onclick="toggleAccordion(this)">
+                    Is there a trial period?
+                    <i class="fas fa-chevron-down text-muted" style="transition: transform 0.3s;"></i>
+                </button>
+                <div class="accordion-body"
+                    style="padding: 0 20px; max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out;">
+                    <p style="padding-bottom: 18px; color: #555; font-size: 0.95rem;">We offer a 3-Day Trial Start plan
+                        specifically designed for you to taste our food and experience our service without an immediate
+                        monthly commitment.</p>
+                </div>
+            </div>
+            <div class="accordion-item"
+                style="background: white; border: 1px solid var(--border); border-radius: 12px; margin-bottom: 10px; overflow: hidden;">
+                <button class="accordion-header"
+                    style="width: 100%; padding: 18px 20px; text-align: left; background: transparent; border: none; font-weight: 600; font-size: 1rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center;"
+                    onclick="toggleAccordion(this)">
+                    How is delivery done?
+                    <i class="fas fa-chevron-down text-muted" style="transition: transform 0.3s;"></i>
+                </button>
+                <div class="accordion-body"
+                    style="padding: 0 20px; max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out;">
+                    <p style="padding-bottom: 18px; color: #555; font-size: 0.95rem;">Our delivery partners will bring
+                        your hot tiffin directly to your hands or leave it at your doorstep/reception depending on your
+                        delivery instructions, exactly within your chosen time slot.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Nav -->
+    <div class="bottom-nav">
+        <div class="bottom-nav-inner">
+            <a href="index.html" class="nav-item"><i class="fas fa-home"></i>Home</a>
+            <a href="menu.html" class="nav-item"><i class="fas fa-list-alt"></i>Orders</a>
+            <a href="subscription.html" class="nav-item active"><i class="far fa-calendar-alt"></i>Subs</a>
+            <a href="dashboard.html" class="nav-item"><i class="fas fa-user"></i>Profile</a>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/navbar.js"></script>
+    <script src="js/subscription.js"></script>
+    <script>
+        function toggleAccordion(btn) {
+            const body = btn.nextElementSibling;
+            const icon = btn.querySelector('.fa-chevron-down');
+            if (body.style.maxHeight && body.style.maxHeight !== '0px') {
+                body.style.maxHeight = '0px';
+                icon.style.transform = 'rotate(0deg)';
+            } else {
+                body.style.maxHeight = body.scrollHeight + 'px';
+                icon.style.transform = 'rotate(180deg)';
+            }
+        }
+    </script>
+</body>
+
+</html>

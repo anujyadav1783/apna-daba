@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Apna Dabba</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/auth.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+  <script>
+    // Anti-guard: Redirect if already logged in
+    (function () {
+      const token = localStorage.getItem('apnadabba_token') || localStorage.getItem('apna_dabba_token');
+      if (token) {
+        window.location.href = 'index.html';
+      }
+    })();
+  </script>
+  <div class="auth-container">
+
+    <div class="auth-header">
+      <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Apna Dabba</a>
+      <h1>Ghar ka swad,<br>har roz.</h1>
+    </div>
+
+    <div class="auth-form-area">
+      <div class="auth-tabs">
+        <a href="login.html" class="auth-tab active">Login</a>
+        <a href="signup.html" class="auth-tab">Sign Up</a>
+      </div>
+
+      <form id="login-form">
+        <span class="auth-label">Email or Phone</span>
+        <div class="input-with-icon">
+          <i class="fas fa-at"></i>
+          <input type="text" id="email" class="input-control" placeholder="Enter your email or phone" required>
+        </div>
+
+        <span class="auth-label">Password</span>
+        <div class="input-with-icon">
+          <i class="fas fa-lock"></i>
+          <input type="password" id="password" class="input-control" placeholder="Enter your password" required>
+          <i class="fas fa-eye eye-icon" id="toggle-password"></i>
+        </div>
+
+        <a href="#" class="forgot-pwd"
+          onclick="showToast('Reset link sent to your email', 'success'); return false;">Forgot password?</a>
+
+        <button type="submit" class="btn-primary auth"
+          style="background: linear-gradient(135deg, var(--primary), #ea580c);">Login</button>
+      </form>
+
+      <div class="social-login">
+        <span class="social-login-text">OR CONTINUE WITH</span>
+      </div>
+
+      <button class="btn-google">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google">
+        Google
+      </button>
+
+      <div class="auth-switch">
+        Don't have an account? <a href="signup.html">Join Now</a>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="js/main.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    // Toggle Password Visibility
+    document.getElementById('toggle-password').addEventListener('click', function () {
+      const pwdInput = document.getElementById('password');
+      if (pwdInput.type === 'password') {
+        pwdInput.type = 'text';
+        this.classList.replace('fa-eye', 'fa-eye-slash');
+      } else {
+        pwdInput.type = 'password';
+        this.classList.replace('fa-eye-slash', 'fa-eye');
+      }
+    });
+
+    // Handle Login Form Submission
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+
+      try {
+        const response = await fetch(`${API_BASE}/auth/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.message || 'Login failed');
+
+        // Adhering to the prompt's required localstorage keys
+        localStorage.setItem('apna_dabba_token', data.token);
+        localStorage.setItem('apna_dabba_user', JSON.stringify(data.user));
+
+        showToast('Login successful!', 'success');
+
+        setTimeout(() => {
+          if (data.user.role === 'admin') {
+            window.location.href = 'admin.html';
+          } else {
+            window.location.href = 'index.html';
+          }
+        }, 1000);
+      } catch (err) {
+        showToast(err.message, 'error');
+      }
+    });
+  </script>
+</body>
+
+</html>

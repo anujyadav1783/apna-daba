@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Support - Apna Dabba</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/support.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <div class="support-header">
+        <!-- Navbar injected by JS -->
+        <h1>We're Here to Help</h1>
+        <p>Have a question about your tiffin subscription or a recent delivery? Our team is just a message away.</p>
+        <button class="btn-faq">View FAQs</button>
+    </div>
+
+    <div class="support-container">
+
+        <h3 class="section-title">Send us a message</h3>
+        <form class="support-form" id="support-form" onsubmit="handleSupportSubmit(event)">
+            <div class="input-group">
+                <label>Full Name</label>
+                <input type="text" id="contact-name" class="input-control" placeholder="Enter your name" required>
+            </div>
+            <div class="input-group">
+                <label>Email Address</label>
+                <input type="email" id="contact-email" class="input-control" placeholder="email@example.com" required>
+            </div>
+            <div class="input-group">
+                <label>Message</label>
+                <textarea id="contact-message" placeholder="How can we help you?" required></textarea>
+            </div>
+            <button type="submit" class="btn-primary">Send Message</button>
+        </form>
+
+        <div class="contact-cards">
+            <div class="contact-card">
+                <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
+                <div class="contact-info">
+                    <h4>WhatsApp Support</h4>
+                    <p>+91 98765 43210</p>
+                </div>
+            </div>
+            <div class="contact-card">
+                <div class="contact-icon"><i class="far fa-clock"></i></div>
+                <div class="contact-info">
+                    <h4>Working Hours</h4>
+                    <p>Mon - Sat, 8:00 AM - 9:00 PM</p>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="section-title">Visit Our Kitchen</h3>
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.5765!2d77.6408!3d12.9116!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sHSR+Layout%2C+Bangalore!5e0!3m2!1sen!2sin!4v1"
+            width="100%" height="300" style="border:0; border-radius:16px; margin-bottom: 30px;" allowfullscreen=""
+            loading="lazy"></iframe>
+
+        <h3 class="section-title">Quick FAQs</h3>
+        <div class="faq-list">
+            <div class="faq-item">
+                <span>Can I cancel my tiffin for today?</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-item">
+                <span>How do I change my delivery address?</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-item">
+                <span>What time will my food arrive?</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Bottom Nav -->
+    <div class="bottom-nav">
+        <div class="bottom-nav-inner">
+            <a href="index.html" class="nav-item"><i class="fas fa-home"></i>Home</a>
+            <a href="menu.html" class="nav-item"><i class="fas fa-utensils"></i>Menu</a>
+            <a href="dashboard.html" class="nav-item"><i class="fas fa-list-alt"></i>Orders</a>
+            <a href="support.html" class="nav-item active"><i class="fas fa-headset"></i>Support</a>
+        </div>
+    </div>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/919876543210" target="_blank"
+        style="position: fixed; bottom: 85px; right: 20px; background: #25D366; color: white; width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); z-index: 100;">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script src="js/main.js"></script>
+    <script src="js/navbar.js"></script>
+    <script>
+        function handleSupportSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('contact-name').value.trim();
+            const email = document.getElementById('contact-email').value.trim();
+            const message = document.getElementById('contact-message').value.trim();
+
+            if (!name || !email || !message) {
+                if (typeof showToast === 'function') showToast('Please fill all required fields.', 'error');
+                else alert('Please fill all required fields.');
+                return;
+            }
+
+            const emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+            if (!emailRegex.test(email)) {
+                if (typeof showToast === 'function') showToast('Please enter a valid email.', 'error');
+                else alert('Please enter a valid email.');
+                return;
+            }
+
+            // Simulating API call
+            if (typeof showToast === 'function') {
+                showToast("Message sent! We'll reply within 2 hours ✓", "success");
+            } else {
+                alert("Message sent! We'll reply within 2 hours ✓");
+            }
+
+            document.getElementById('support-form').reset();
+        }
+    </script>
+</body>
+
+</html>

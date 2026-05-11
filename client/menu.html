@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu - Apna Dabba</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Inline tweak for search icon */
+        .search-btn i {
+            color: var(--primary);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="menu-container">
+        <!-- Navbar injected by JS -->
+
+        <div class="menu-search-container"
+            style="padding: 15px 5%; background: white; border-bottom: 1px solid var(--border); position: sticky; top: 60px; z-index: 10;">
+            <div class="search-bar"
+                style="display: flex; align-items: center; background: #f8f5f1; border-radius: 20px; padding: 10px 15px;">
+                <i class="fas fa-search text-muted" style="margin-right: 10px;"></i>
+                <input type="text" id="menu-search-input" placeholder="Search for meals..."
+                    style="border: none; background: transparent; outline: none; width: 100%; font-family: inherit; font-size: 1rem;">
+            </div>
+        </div>
+
+        <div class="category-scroll">
+            <button class="cat-pill active" data-cat="all">All</button>
+            <button class="cat-pill" data-cat="breakfast">Breakfast</button>
+            <button class="cat-pill" data-cat="lunch">Lunch</button>
+            <button class="cat-pill" data-cat="dinner">Dinner</button>
+            <button class="cat-pill" data-cat="snacks">Snacks</button>
+        </div>
+
+        <div class="veg-toggle-card">
+            <div class="veg-info">
+                <div class="veg-icon"><i class="fas fa-leaf"></i></div>
+                <div class="veg-toggle-label">
+                    <h3>Veg Only</h3>
+                    <p>Filter by vegetarian preferences</p>
+                </div>
+            </div>
+            <label class="toggle-switch">
+                <input type="checkbox" id="veg-toggle">
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <div class="food-grid" id="food-grid">
+            <!-- Injected by menu.js -->
+        </div>
+    </div>
+
+    <!-- Floating Cart Button -->
+    <div class="floating-cart" id="floating-cart" onclick="toggleCartDrawer()">
+        <div class="cart-left">
+            <div class="cart-icon-bg">
+                <i class="fas fa-shopping-bag"></i>
+                <span class="cart-badge" id="cart-badge">0</span>
+            </div>
+            <div class="cart-text">
+                <h4>View Cart</h4>
+                <p id="float-items">0 items from Apna Dabba</p>
+            </div>
+        </div>
+        <div class="cart-right">
+            <span id="float-total">₹0</span>
+            <i class="fas fa-chevron-right"></i>
+        </div>
+    </div>
+
+    <!-- Cart Drawer -->
+    <div class="cart-overlay" id="cart-overlay" onclick="toggleCartDrawer()"></div>
+    <div class="cart-drawer" id="cart-drawer">
+        <div class="drawer-header">
+            <h2>Your Cart</h2>
+            <i class="fas fa-times close-drawer" onclick="toggleCartDrawer()"></i>
+        </div>
+        <div class="cart-items-list" id="cart-items-list">
+            <!-- Items -->
+        </div>
+        <div class="drawer-footer">
+            <div class="bill-row">
+                <span>Item Total</span>
+                <span id="drawer-subtotal">₹0</span>
+            </div>
+            <div class="bill-row">
+                <span>Delivery Fee</span>
+                <span>₹30</span>
+            </div>
+            <div class="bill-row total">
+                <span>To Pay</span>
+                <span id="drawer-total">₹0</span>
+            </div>
+            <button class="btn-primary" onclick="placeOrder()">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- Bottom Nav -->
+    <div class="bottom-nav">
+        <div class="bottom-nav-inner">
+            <a href="index.html" class="nav-item"><i class="fas fa-home"></i>Home</a>
+            <a href="menu.html" class="nav-item active"><i class="fas fa-utensils"></i>Menu</a>
+            <a href="dashboard.html" class="nav-item"><i class="fas fa-user"></i>Profile</a>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/navbar.js"></script>
+    <script src="js/menu.js"></script>
+    <script src="js/cart.js"></script>
+</body>
+
+</html>

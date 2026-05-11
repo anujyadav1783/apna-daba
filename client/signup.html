@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Apna Dabba</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <script>
+        // Anti-guard: Redirect if already logged in
+        (function () {
+            const token = localStorage.getItem('apnadabba_token') || localStorage.getItem('apna_dabba_token');
+            if (token) {
+                window.location.href = 'index.html';
+            }
+        })();
+    </script>
+    <div class="auth-container">
+
+        <div class="auth-header" style="height: 180px;">
+            <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> 🍱 Apna Dabba</a>
+            <h1 style="font-size: 1.5rem;">Join the family.</h1>
+        </div>
+
+        <div class="auth-form-area" style="margin-top: -30px;">
+            <div class="auth-tabs">
+                <a href="login.html" class="auth-tab">Login</a>
+                <a href="signup.html" class="auth-tab active">Sign Up</a>
+            </div>
+
+            <span class="auth-label">I am a</span>
+            <div class="role-selector" id="userType-selector">
+                <button class="role-btn active" data-role="student">Student</button>
+                <button class="role-btn" data-role="professional">Professional</button>
+                <button class="role-btn" data-role="other">Other</button>
+            </div>
+
+            <form id="signup-form">
+                <div class="input-with-icon" style="margin-bottom: 12px;">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="fullName" class="input-control" placeholder="Full Name" required>
+                </div>
+
+                <div class="input-with-icon" style="margin-bottom: 12px;">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="email" class="input-control" placeholder="Email Address" required>
+                </div>
+
+                <div class="input-with-icon" style="margin-bottom: 12px;">
+                    <i class="fas fa-phone"></i>
+                    <input type="tel" id="phone" class="input-control" placeholder="Phone Number" required>
+                </div>
+
+                <div class="input-with-icon" style="margin-bottom: 8px;">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="password" class="input-control" placeholder="Password"
+                        onkeyup="checkPasswordStrength()" required>
+                    <i class="fas fa-eye eye-icon" id="toggle-password"></i>
+                </div>
+
+                <div
+                    style="font-size: 0.75rem; display: flex; justify-content: space-between; margin-bottom: 12px; padding: 0 4px;">
+                    <span style="color: var(--text-muted)">Password Strength:</span>
+                    <span id="pwd-strength-text" style="font-weight: 600;">None</span>
+                </div>
+                <div
+                    style="height: 4px; background: #eee; border-radius: 2px; margin-bottom: 16px; overflow: hidden; display: flex;">
+                    <div id="pwd-strength-bar"
+                        style="height: 100%; width: 0%; transition: 0.3s; background: var(--error);"></div>
+                </div>
+
+                <div class="input-with-icon" style="margin-bottom: 16px;">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="confirm" class="input-control" placeholder="Confirm Password" required>
+                </div>
+
+                <button type="submit" class="btn-primary auth"
+                    style="background: linear-gradient(135deg, var(--primary), #ea580c);">Create Account</button>
+            </form>
+
+            <div class="auth-switch">
+                Already have an account? <a href="login.html">Login</a>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        // Handle role selection
+        let selectedRole = 'student';
+        document.querySelectorAll('.role-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                document.querySelectorAll('.role-btn').forEach(b => b.classList.remove('active'));
+                e.target.classList.add('active');
+                selectedRole = e.target.getAttribute('data-role');
+            });
+        });
+
+        // Toggle Password Visibility
+        document.getElementById('toggle-password').addEventListener('click', function () {
+            const pwdInput = document.getElementById('password');
+            if (pwdInput.type === 'password') {
+                pwdInput.type = 'text';
+                this.classList.replace('fa-eye', 'fa-eye-slash');
+            } else {
+                pwdInput.type = 'password';
+                this.classList.replace('fa-eye-slash', 'fa-eye');
+            }
+        });
+
+        // Password Strength Checker
+        function checkPasswordStrength() {
+            const pwd = document.getElementById('password').value;
+            const bar = document.getElementById('pwd-strength-bar');
+            const txt = document.getElementById('pwd-strength-text');
+
+            let strength = 0;
+            if (pwd.length > 5) strength++;
+            if (pwd.length > 8) strength++;
+            if (/[A-Z]/.test(pwd)) strength++;
+            if (/[0-9]/.test(pwd)) strength++;
+            if (/[^A-Za-z0-9]/.test(pwd)) strength++;
+
+            if (pwd.length === 0) {
+                bar.style.width = '0%'; txt.textContent = 'None'; txt.style.color = 'var(--text-muted)';
+            } else if (strength < 2) {
+                bar.style.width = '33%'; bar.style.background = 'var(--error)'; txt.textContent = 'Weak'; txt.style.color = 'var(--error)';
+            } else if (strength < 4) {
+                bar.style.width = '66%'; bar.style.background = 'var(--warning)'; txt.textContent = 'Medium'; txt.style.color = 'var(--warning)';
+            } else {
+                bar.style.width = '100%'; bar.style.background = 'var(--success)'; txt.textContent = 'Strong'; txt.style.color = 'var(--success)';
+            }
+        }
+
+        // Handle Signup Form Submission
+        document.getElementById('signup-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const fullName = document.getElementById('fullName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const password = document.getElementById('password').value;
+            const confirm = document.getElementById('confirm').value;
+
+            if (password !== confirm) {
+                showToast('Passwords do not match', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/auth/signup`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ fullName, email, phone, password, userType: selectedRole })
+                });
+
+                const data = await response.json();
+                if (!response.ok) throw new Error(data.message || 'Signup failed');
+
+                showToast('Account created successfully!', 'success');
+
+                setTimeout(() => {
+                    window.location.href = 'login.html';
+                }, 1000);
+            } catch (err) {
+                showToast(err.message, 'error');
+            }
+        });
+    </script>
+</body>
+
+</html>

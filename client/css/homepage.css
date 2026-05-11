@@ -1,0 +1,141 @@
+.hero-section {
+    padding: 60px 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--secondary);
+    border-radius: 0 0 40px 40px;
+}
+
+.hero-content {
+    max-width: 50%;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    color: var(--text-main);
+}
+
+.hero-content p {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin-bottom: 30px;
+}
+
+.search-bar {
+    display: flex;
+    background: white;
+    padding: 8px;
+    border-radius: 30px;
+    box-shadow: var(--card-shadow);
+}
+
+.search-bar input {
+    flex: 1;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 30px;
+    outline: none;
+    font-size: 1rem;
+}
+
+.search-bar button {
+    background-color: var(--primary);
+    color: white;
+    border-radius: 30px;
+    padding: 10px 24px;
+    font-weight: 600;
+}
+
+.hero-image img {
+    max-width: 100%;
+    border-radius: 20px;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 40px;
+    color: var(--text-main);
+}
+
+.popular-meals {
+    padding: 80px 5%;
+}
+
+.meals-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.meal-card {
+    background: white;
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    transition: transform 0.3s;
+}
+
+.meal-card:hover {
+    transform: translateY(-5px);
+}
+
+.meal-img {
+    height: 200px;
+    background-color: #eee;
+    background-size: cover;
+    background-position: center;
+}
+
+.meal-info {
+    padding: 20px;
+}
+
+.meal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.meal-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.meal-price {
+    font-size: 1.2rem;
+    color: var(--primary);
+    font-weight: 700;
+}
+
+.meal-desc {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    line-height: 1.4;
+}
+
+.btn-add {
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .hero-section {
+        flex-direction: column;
+        text-align: center;
+        padding: 40px 5%;
+    }
+
+    .hero-content {
+        max-width: 100%;
+        margin-bottom: 40px;
+    }
+
+    .hero-content h1 {
+        font-size: 2.2rem;
+    }
+}
